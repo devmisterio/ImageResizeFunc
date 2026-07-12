@@ -12,7 +12,7 @@ public sealed class ResizeImage(ILogger<ResizeImage> logger)
 {
     [Function("ResizeImage")]
     [BlobOutput("thumbnails/{name}", Connection = "AzureWebJobsStorage")]
-    public async Task<byte[]> Run([BlobTrigger("uploads/{name}", Connection = "AzureWebJobsStorage")] byte[] imageBytes, string name)
+    public async Task<byte[]> Run([BlobTrigger("uploads/{name}", Source = BlobTriggerSource.EventGrid, Connection = "AzureWebJobsStorage")] byte[] imageBytes, string name)
     {
         logger.LogInformation("[Triggered] Yeni resim geldi: {Name}", name);
         
